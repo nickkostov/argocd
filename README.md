@@ -173,3 +173,20 @@ HA
 VERSION=v2.13.1
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${VERSION}/manifests/ha/install.yaml
 ```
+
+### RBAC (Role Based Access Control)
+
+- Argo CD's RBAC feature enables restriction of access to Argo CD resources.
+
+- Since Argo CD does not have its own user management system it requires SSO configuration or local users set up.
+
+> Recommended path is SSO (Okta, Entra ID, etc) **if** teams are > 5 <br>
+> Recommended path is just users **if** users are < 5
+
+- After either SS or local users is setup in Argo CD more RBAC roles can be defined, and local users or SSO users/groups can be mapped to these roles.
+
+There are two Built-in Roles:
+
+| role:readonly | role:admin |
+| -------------| ---------- | 
+| read-only access <br> to all resources | unrestricted access to all resources |
