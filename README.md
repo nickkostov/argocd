@@ -197,15 +197,15 @@ argocd cluster list -o json
 ```bash 
 argocd cluster add example-cluster
 ```
-- 
+- Get specific details about a cluster in plain text (wide) format:
 ```bash 
 argocd cluster get example-cluster -o wide
 ```
-- 
+- Remove a target cluster context from ArgoCD
 ```bash 
 argocd cluster rm example-cluster
 ```
-- 
+- Set a target cluster context from ArgoCD
 ```bash 
 argocd cluster set CLUSTER_NAME --name new-cluster-name --namespace '*'
 argocd cluster set CLUSTER_NAME --name new-cluster-name --namespace namespace-one --namespace namespace-two
