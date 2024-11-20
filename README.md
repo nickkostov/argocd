@@ -24,7 +24,7 @@ Repository containing hypotetical bootstrap of ArgoCD
 
 ### Non High Availability
 
-![Non High Availability](images/non-high-availabiltity.png)
+![Non High Availability](images/non-ha.png)
 
 - Manifest = install.yaml
 - Recommended for dev
@@ -32,7 +32,7 @@ Repository containing hypotetical bootstrap of ArgoCD
 
 ### High Availability
 
-![High Availability](images/high-availabiltity.png)
+![High Availability](images/ha.png)
 - Manifest = namespace-install.yaml
 - Recommended for prod
 - Turned for high availabiltiy and resiliency
