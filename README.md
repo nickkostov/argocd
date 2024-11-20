@@ -99,6 +99,6 @@ Chocolatey install argocd-cli
 
 ### Common commands:
 
-![](commands.md)
+[Check Here](commands.md)
 
 #
