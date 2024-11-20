@@ -231,6 +231,30 @@ data:
    g, my-github:teama, role:org-admin, *, */*, allow  ➡️
 ```
 
-> Configures a custom role ⬅️ 1 <br>
+> Configures a custom role ⬅️  <br>
 The role is assigned to users that belong to a my-github:teama group in GitHub ⬅️ <br> 
 Other users will get the default policy of role:readonly ⬅️
+
+💡 Create configmap that will create roles in the following logic:
+- Clusters Admin
+- Projects Admin
+- Applications Admin
+- Repository Admin
+- Certificates Admin
+- Accounts Admin
+- GPG Keys Admin
+
+## User Management
+
+- Option 1: Local Users:
+  - Good for small teams or less & an API account for automation.
+  - Argo CD local users are stored in a ConfigMap that is applied to Argo CD
+  - Local Argo CD users do not have advanced features like groups, login history etc...
+  - Each new user will need to be assigned a built in role.
+    - readonly - read-only access to all resources
+    - admin - unrestricted access to all resources 
+  - Each new user will also need policy rules defined. Or they will default to `policy.default` These are: 
+    - p, subject, resource, action, object and effect
+- Option 2: SSO Integration:
+  - This is good for larger teams & integrating with external identity providers.
+
