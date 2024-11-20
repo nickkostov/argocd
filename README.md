@@ -31,3 +31,9 @@ Repository containing hypotetical bootstrap of ArgoCD
 - Single pods and replicas for Argo CD components
 
 ### High Availability
+
+![High Availability](images/high-availabiltity.png)
+- Manifest = namespace-install.yaml
+- Recommended for prod
+- Turned for high availabiltiy and resiliency
+- Multiple replicas for supported components
