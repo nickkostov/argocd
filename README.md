@@ -128,3 +128,12 @@ argocd admin initial-password -n argocd
 ```bash
 argocd account update-password
 ```
+
+## Upgrading Argo CD
+
+- Follows Sematic Versioning
+
+| Major       | Minor       | Patch      |
+| -------------------------------------------------- | ----------- | -----------|
+| Major versions makes **incompatible** API Changes      | Minor version adds **functionality** in a compatible manner | Patch Makes **backward compatible** bug fixes|
+| Major Introduces backward incompatible behaviour changes with previous Argo CD versions| Minor might introduce changes to Argo CD with a workaround | Patch such as Argo CD v1.6.1 to 1.6.3 does not introduce any breaking changes|
