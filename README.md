@@ -1,6 +1,7 @@
 # argocd
 Repository containing hypotetical bootstrap of ArgoCD
 
+<a href="https://argo-cd.readthedocs.io/en/stable/"><img src="https://argo-cd.readthedocs.io/en/stable/assets/logo.png" /></a>
 ---
 
 # Requirements:
