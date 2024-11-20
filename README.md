@@ -53,3 +53,23 @@ Repository containing hypotetical bootstrap of ArgoCD
 ![Namespace Level](images/ns-level.png)
 
 - Use when you have namespace level access and will deploy apps to **external** K8s Clusters from where Argo CD is running.
+- You need to authenticate the external clusters with Argo CD.
+
+## Install Argo CD:
+
+1. Create a namespace for Argo CD to deploy all of its components in:
+
+```bash
+kubectl get namespace argocd
+``` 
+Or you could adjust the ```provider.tf``` file to work with your cluster or set it up with a remote ```backend.tf``` 
+
+2. Install Argo CD into the new namespace you created. Reference Argo CD's GitHub repository for the latest Argo CD operator.
+
+
+*Hint* this is from the stable release branch!
+```bash
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+
