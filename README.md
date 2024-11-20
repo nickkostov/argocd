@@ -101,4 +101,30 @@ Chocolatey install argocd-cli
 
 [Check Here](commands.md)
 
-#
+## Argo CD Web UI
+
+### Use Service Type Load Balancer
+
+```bash
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+
+If you are using a local k8s emulator: https://localhost
+
+### Port Forwarding
+
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+### Password First Time 
+
+- Get inital password
+```bash
+argocd admin initial-password -n argocd
+```
+- Change password
+
+```bash
+argocd account update-password
+```
