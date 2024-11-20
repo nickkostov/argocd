@@ -24,6 +24,8 @@ Repository containing hypotetical bootstrap of ArgoCD
 
 ### Non High Availability
 
+![Non High Availability](images/non-high-availabiltity.png)
+
 - Manifest = install.yaml
 - Recommended for dev
 - Single pods and replicas for Argo CD components
