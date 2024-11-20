@@ -174,7 +174,7 @@ VERSION=v2.13.1
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${VERSION}/manifests/ha/install.yaml
 ```
 
-### RBAC (Role Based Access Control)
+## RBAC (Role Based Access Control)
 
 - Argo CD's RBAC feature enables restriction of access to Argo CD resources.
 
@@ -185,8 +185,52 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${
 
 - After either SS or local users is setup in Argo CD more RBAC roles can be defined, and local users or SSO users/groups can be mapped to these roles.
 
-There are two Built-in Roles:
+#### There are two Built-in Roles:
 
 | role:readonly | role:admin |
 | -------------| ---------- | 
-| read-only access <br> to all resources | unrestricted access to all resources |
+| read-only access <br> to all resources | unrestricted access <br> to all resources |
+
+![RBAC](images/rbac-built-in.png)
+
+### Resources and actions:
+
+| Resources | Actions |
+| -------------| ---------- | 
+| clusters, projects, <br> applications, repositories, <br> certificates, accounts, <br> gpgkeys | get, create, update delete, <br> sync, override, action |
+
+![RBAC](images/rbac-resources-actions.png)
+
+### Permissions:
+
+
+| All resources except <br> applications | Applications (tied to an AppProject) |
+| -------------| ---------- | 
+| p, <role/user/group>, <br> 'action', `object`| p, <role/user/group>, <resource>, <br> 'action', `<appproject>/<object>` |
+
+
+![RBAC](images/rbac-permissions.png)
+
+### Example ConfigMap argocd-rbac-cm:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.default: role:readonly ➡️
+  policy.csv: | ➡️
+   p, role:org-admin, applications, *, */*, allow
+   p, role:org-admin, clusters, get, *, allow
+   p, role:org-admin, repositories, get, *, allow
+   p, role:org-admin, repositories, create, *, allow
+   p, role:org-admin, repositories, update, *, allow
+   p, role:org-admin, repositories, delete, *, allow
+   g, my-github:teama, role:org-admin, *, */*, allow  ➡️
+```
+
+> Configures a custom role ⬅️ 1 <br>
+The role is assigned to users that belong to a my-github:teama group in GitHub ⬅️ <br> 
+Other users will get the default policy of role:readonly ⬅️
