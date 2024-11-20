@@ -71,6 +71,20 @@ Or you could adjust the ```provider.tf``` file to work with your cluster or set 
 ```bash
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
+## URL Logic:
+
+Non HA (High Availabiltiy)
+```bash
+VERSION=v2.13.1
+https://raw.githubusercontent.com/argoproj/argo-cd/$VERSION/manifests/install.yaml
+```
+
+HA
+```bash
+VERSION=v2.13.1
+https://raw.githubusercontent.com/argoproj/argo-cd/$VERSION/manifests/ha/install.yaml
+```
+
 
 # Accesss Argo CD API Server
 
@@ -137,3 +151,25 @@ argocd account update-password
 | -------------------------------------------------- | ----------- | -----------|
 | Major versions makes **incompatible** API Changes      | Minor version adds **functionality** in a compatible manner | Patch Makes **backward compatible** bug fixes|
 | Major Introduces backward incompatible behaviour changes with previous Argo CD versions| Minor might introduce changes to Argo CD with a workaround | Patch such as Argo CD v1.6.1 to 1.6.3 does not introduce any breaking changes|
+
+
+### Quick scripts for upgrade:
+
+> You just need to increment the numbers 🧐
+
+Non HA (High Availabiltiy)
+
+```bash
+#!/bin/bash
+
+VERSION=v2.13.1
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${VERSION}/manifests/install.yaml
+```
+
+HA
+```bash
+#!/bin/bash
+
+VERSION=v2.13.1
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${VERSION}/manifests/ha/install.yaml
+```
