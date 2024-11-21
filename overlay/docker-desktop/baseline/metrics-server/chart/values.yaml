@@ -1,0 +1,18 @@
+# reference: https://github.com/kubernetes-sigs/metrics-server/blob/master/charts/metrics-server/values.yaml
+metrics-server:
+  args:
+    - --kubelet-insecure-tls
+
+  nodeSelector:
+    cluster-node-role: system
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
+  tolerations:
+    - key: cluster-node-role
+      operator: Equal
+      value: system
+      effect: NoSchedule

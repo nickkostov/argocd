@@ -1,0 +1,10 @@
+apiVersion: v2
+
+name: metrics-server
+description: Collects resource utilization from Kubelet for usage in 'kubectl top' commands.
+version: 3.12.2
+
+dependencies:
+  - name: metrics-server
+    repository: https://kubernetes-sigs.github.io/metrics-server/
+    version: 3.12.2
