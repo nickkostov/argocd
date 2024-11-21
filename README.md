@@ -76,13 +76,13 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 Non HA (High Availabiltiy)
 ```bash
 VERSION=v2.13.1
-https://raw.githubusercontent.com/argoproj/argo-cd/$VERSION/manifests/install.yaml
+https://raw.githubusercontent.com/argoproj/argo-cd/${VERSION}/manifests/install.yaml
 ```
 
 HA
 ```bash
 VERSION=v2.13.1
-https://raw.githubusercontent.com/argoproj/argo-cd/$VERSION/manifests/ha/install.yaml
+https://raw.githubusercontent.com/argoproj/argo-cd/${VERSION}/manifests/ha/install.yaml
 ```
 
 
@@ -255,6 +255,52 @@ Other users will get the default policy of role:readonly ⬅️
     - admin - unrestricted access to all resources 
   - Each new user will also need policy rules defined. Or they will default to `policy.default` These are: 
     - p, subject, resource, action, object and effect
+  - Example ConfigMap:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd-cm
+data: 
+# add an additional local user called ivan
+# apiKey - allows generating API Keys
+# login - allows to login using UI
+  accounts.ivan: apiKey, login
+# disables user if set to true"
+  accounts.ivan.enabled: "false"
+```
+
+> In Argo CD new users are created in a ConfigMap named argocd-cm
+Users can have the following capabilities:
+> - apiKey - Allows generating API keys
+> - login - Allows login using UI
+> Managing users has to be done using Argo CD CLI
+> - Get user list: `argocd account list`
+> - Get user details: `argocd account get --account USERNAME`
+> Set user password: `argocd account get --account USERNAME`
+
+  -  Change the password with:
+```bash
+argocd account update-password --account ivan --new-password password
+```
+```bash
+CURRENT_ADMIN_PASSWORD=""
+argocd account update-password --account ivan --current-password '${CURRENT_ADMIN_PASSWORD}' --new-password mysecurepass2
+```
 - Option 2: SSO Integration:
   - This is good for larger teams & integrating with external identity providers.
-
+  - Confuigured in the argocd-cm ConfigMa
+  - Argo CD handles SSO via one of two options:
+    - DEX OIDC provider when your identity provider does not support OIDC i.e. SAML or LDAP
+    - Existing OIDC provider. Supported OIDC providers are:
+      - Auth0
+      - Microsoft
+      - Okta
+      - OneLogin
+      - Keycloak
+      - OpenUnison
+      - Google
