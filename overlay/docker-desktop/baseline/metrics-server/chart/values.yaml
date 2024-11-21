@@ -3,16 +3,16 @@ metrics-server:
   args:
     - --kubelet-insecure-tls
 
-  nodeSelector:
-    cluster-node-role: system
+#  nodeSelector:
+#    cluster-node-role: system
 
   securityContext:
     allowPrivilegeEscalation: false
     readOnlyRootFilesystem: true
     runAsNonRoot: true
 
-  tolerations:
-    - key: cluster-node-role
-      operator: Equal
-      value: system
-      effect: NoSchedule
+#  tolerations:
+#    - key: cluster-node-role
+#      operator: Equal
+#      value: system
+#      effect: NoSchedule
